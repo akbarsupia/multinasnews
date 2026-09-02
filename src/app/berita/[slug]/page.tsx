@@ -7,8 +7,9 @@ import ArticleActions from '@/components/ArticleActions';
 // --- SEO: Dynamic Metadata untuk setiap berita ---
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
+  const decodedSlug = decodeURIComponent(slug);
   try {
-    const docSnap = await adminDb.collection('articles').doc(slug).get();
+    const docSnap = await adminDb.collection('articles').doc(decodedSlug).get();
     if (docSnap.exists) {
       const data = docSnap.data()!;
       const description = data.content ? data.content.substring(0, 160).replace(/\n/g, ' ') + '...' : 'Baca berita selengkapnya di multinasnews.id.';

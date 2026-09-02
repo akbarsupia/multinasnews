@@ -123,7 +123,7 @@ export default function Home() {
                    {data.title}
                   </h1>
                   <p className="text-white/80 text-lg md:text-xl font-light mb-8 font-body leading-relaxed hidden sm:-webkit-box sm:[-webkit-line-clamp:2] sm:[-webkit-box-orient:vertical] sm:overflow-hidden drop-shadow">{data.desc}</p>
-                  <Link href={`/berita/${data.id || 'baca'}`} className="bg-white inline-flex text-slate-900 px-6 py-3 rounded-xl font-label font-bold text-xs hover:bg-slate-200 transition-colors items-center gap-2 relative z-20 cursor-pointer w-fit shadow-lg shadow-white/10 hover:shadow-white/20 hover:-translate-y-1 transform">
+                  <Link href={`/berita/${encodeURIComponent(data.id || 'baca')}`} className="bg-white inline-flex text-slate-900 px-6 py-3 rounded-xl font-label font-bold text-xs hover:bg-slate-200 transition-colors items-center gap-2 relative z-20 cursor-pointer w-fit shadow-lg shadow-white/10 hover:shadow-white/20 hover:-translate-y-1 transform">
                     BACA KRONOLOGI <span className="material-symbols-outlined text-sm">arrow_forward</span>
                   </Link>
                 </div>
@@ -146,7 +146,7 @@ export default function Home() {
               <div className="space-y-5 relative z-10">
                 {displayedPicks.map((article, index) => <div key={article.id}>
                   {index > 0 && <div className="w-full h-px bg-slate-200 dark:bg-slate-800 mb-5"></div>}
-                  <Link href={`/berita/${article.id}`} className="group block">
+                  <Link href={`/berita/${encodeURIComponent(article.id)}`} className="group block">
                     <span className="text-[10px] font-label font-bold text-cyan-500 mb-2 block tracking-widest uppercase">{article.category || 'PILIHAN EDITOR'}</span>
                     <h4 className="font-headline text-lg font-bold group-hover:text-cyan-500 transition-colors mb-2 dark:text-slate-100 leading-snug line-clamp-2">{article.title}</h4>
                     <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">{article.content || 'Baca liputan pilihan redaksi selengkapnya.'}</p>
@@ -167,7 +167,7 @@ export default function Home() {
               
               <div className="grid grid-cols-1 gap-10">
                 {mainNews && (
-                <Link href={`/berita/${mainNews.id}`} className="group block">
+                <Link href={`/berita/${encodeURIComponent(mainNews.id)}`} className="group block">
                   <div className="aspect-[21/9] bg-slate-200 dark:bg-slate-800 mb-5 overflow-hidden rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 relative">
                     <img className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src={mainNews.image || defaultImg} alt={mainNews.title} loading="lazy" decoding="async" />
                     <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-red-700 px-3 py-1 text-[10px] font-bold tracking-widest rounded-md uppercase border border-red-100 shadow-sm">{mainNews.category}</div>
@@ -180,7 +180,7 @@ export default function Home() {
                 {subNews.length > 0 && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
                   {subNews.map((sn, i) => (
-                  <Link key={i} href={`/berita/${sn.id}`} className="flex flex-col sm:flex-row gap-4 sm:gap-5 group bg-slate-50 dark:bg-slate-900 p-4 rounded-xl hover:shadow-lg transition-all border border-slate-200 dark:border-slate-800 hover:border-cyan-200">
+                  <Link key={i} href={`/berita/${encodeURIComponent(sn.id)}`} className="flex flex-col sm:flex-row gap-4 sm:gap-5 group bg-slate-50 dark:bg-slate-900 p-4 rounded-xl hover:shadow-lg transition-all border border-slate-200 dark:border-slate-800 hover:border-cyan-200">
                     <div className="w-full h-40 sm:w-28 sm:h-28 flex-shrink-0 bg-slate-200 dark:bg-slate-800 overflow-hidden rounded-lg relative">
                         <img className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src={sn.image || defaultImg} alt={sn.title} loading="lazy" decoding="async"/>
                     </div>
@@ -197,7 +197,7 @@ export default function Home() {
                 {restNews.length > 0 && (
                 <div className="space-y-6 mt-8 pt-8 border-t border-dashed border-slate-200 dark:border-slate-800">
                   {restNews.map((article, i) => (
-                    <Link key={i} href={`/berita/${article.id}`} className="flex flex-col sm:flex-row gap-4 sm:gap-6 group bg-white dark:bg-slate-900 p-4 rounded-xl shadow-sm hover:shadow-md transition-all border border-slate-100 dark:border-slate-800 fade-in">
+                    <Link key={i} href={`/berita/${encodeURIComponent(article.id)}`} className="flex flex-col sm:flex-row gap-4 sm:gap-6 group bg-white dark:bg-slate-900 p-4 rounded-xl shadow-sm hover:shadow-md transition-all border border-slate-100 dark:border-slate-800 fade-in">
                       <div className="w-full sm:w-32 md:w-48 aspect-video flex-shrink-0 bg-slate-200 dark:bg-slate-800 overflow-hidden rounded-lg relative">
                           <img className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src={article.image || defaultImg} alt={article.title} loading="lazy" decoding="async"/>
                           <div className="absolute bottom-2 left-2 bg-black/60 backdrop-blur-sm text-white px-2 py-0.5 text-[8px] font-bold tracking-widest rounded uppercase">{article.category}</div>
