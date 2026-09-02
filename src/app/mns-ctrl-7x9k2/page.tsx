@@ -458,69 +458,88 @@ export default function AdminDashboard() {
   if (loading) return <div className="min-h-screen bg-slate-50 flex items-center justify-center"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-500"></div></div>;
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row bg-slate-50 text-slate-900 font-public-sans w-full">
-       <aside className="w-full md:w-64 bg-white border-b md:border-b-0 md:border-r border-slate-200 shadow-[2px_0_10px_rgba(0,0,0,0.02)] flex flex-col z-20 flex-shrink-0">
-          <div className="p-4 md:p-6 border-b border-slate-100 flex items-center justify-between md:block">
+       {/* SIDEBAR - desktop: left column | mobile: bottom tab bar */}
+       <aside className="
+         fixed bottom-0 left-0 right-0 z-30 bg-white border-t border-slate-200 shadow-[0_-2px_10px_rgba(0,0,0,0.05)]
+         md:relative md:bottom-auto md:left-auto md:right-auto md:w-64 md:border-t-0 md:border-r md:border-slate-200 md:shadow-[2px_0_10px_rgba(0,0,0,0.02)] md:flex md:flex-col md:z-20 md:flex-shrink-0
+       ">
+          {/* Logo — hanya tampil di desktop */}
+          <div className="hidden md:flex p-6 border-b border-slate-100 items-center justify-between">
              <div className="flex items-center gap-2">
-                <img src="/logomultinasnews.png" alt="Logo Multinasnews" width="205" height="205" className="h-8 w-auto object-contain" />
+                <img src="/logomultinasnews.png" alt="Logo" width="205" height="205" className="h-8 w-auto object-contain" />
                 <span className="text-xl font-black tracking-tighter text-slate-800 font-headline">
-                  multinas<span className="text-cyan-500">news</span>
+                  multinas<span className="text-cyan-500">news</span>.id
                 </span>
              </div>
-             <button onClick={handleLogout} className="md:hidden flex items-center justify-center p-2 text-slate-500 hover:text-cyan-500 bg-slate-50 rounded-lg border border-slate-200">
-                <span className="material-symbols-outlined text-[20px]">logout</span>
-             </button>
           </div>
-          <nav className="flex md:flex-col md:flex-1 p-3 md:p-4 gap-2 md:space-y-2 overflow-x-auto hide-scrollbar whitespace-nowrap">
-             <button onClick={() => setActiveTab('dashboard')} className={`flex-shrink-0 flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 rounded-xl text-xs md:text-sm font-semibold transition-all ${activeTab === 'dashboard' ? 'bg-cyan-50 text-cyan-600 shadow-sm' : 'text-slate-600 hover:bg-slate-50 border border-transparent hover:border-slate-200'}`}>
-                <span className="material-symbols-outlined text-[18px] md:text-[20px]">dashboard</span> Ringkasan
-             </button>
-             <button onClick={() => setActiveTab('berita')} className={`flex-shrink-0 flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 rounded-xl text-xs md:text-sm font-semibold transition-all ${activeTab === 'berita' ? 'bg-cyan-50 text-cyan-600 shadow-sm' : 'text-slate-600 hover:bg-slate-50 border border-transparent hover:border-slate-200'}`}>
-                <span className="material-symbols-outlined text-[18px] md:text-[20px]">edit_document</span> Tulis Liputan
-             </button>
-             <button onClick={() => setActiveTab('kelola-berita')} className={`flex-shrink-0 flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 rounded-xl text-xs md:text-sm font-semibold transition-all ${activeTab === 'kelola-berita' ? 'bg-cyan-50 text-cyan-600 shadow-sm' : 'text-slate-600 hover:bg-slate-50 border border-transparent hover:border-slate-200'}`}>
-                <span className="material-symbols-outlined text-[18px] md:text-[20px]">article</span> Manajemen Berita
-             </button>
-             {role === 'admin' && <button onClick={() => setActiveTab('redaksi')} className={`flex-shrink-0 flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 rounded-xl text-xs md:text-sm font-semibold transition-all ${activeTab === 'redaksi' ? 'bg-cyan-50 text-cyan-600 shadow-sm' : 'text-slate-600 hover:bg-slate-50 border border-transparent hover:border-slate-200'}`}>
-                <span className="material-symbols-outlined text-[18px] md:text-[20px]">badge</span> Kelola Jurnalis
-             </button>}
-             {role === 'admin' && <button onClick={() => setActiveTab('otomatisasi')} className={`flex-shrink-0 flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 rounded-xl text-xs md:text-sm font-semibold transition-all ${activeTab === 'otomatisasi' ? 'bg-cyan-50 text-cyan-600 shadow-sm' : 'text-slate-600 hover:bg-slate-50 border border-transparent hover:border-slate-200'}`}>
-                <span className="material-symbols-outlined text-[18px] md:text-[20px]">smart_toy</span> Otomatisasi
-             </button>}
-             {role === 'admin' && <button onClick={() => setActiveTab('breaking-news')} className={`flex-shrink-0 flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 rounded-xl text-xs md:text-sm font-semibold transition-all ${activeTab === 'breaking-news' ? 'bg-cyan-50 text-cyan-600 shadow-sm' : 'text-slate-600 hover:bg-slate-50 border border-transparent hover:border-slate-200'}`}>
-                <span className="material-symbols-outlined text-[18px] md:text-[20px]">campaign</span> Breaking News
-             </button>}
-             {role === 'admin' && <button onClick={() => setActiveTab('pengaturan')} className={`flex-shrink-0 flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 rounded-xl text-xs md:text-sm font-semibold transition-all ${activeTab === 'pengaturan' ? 'bg-cyan-50 text-cyan-600 shadow-sm' : 'text-slate-600 hover:bg-slate-50 border border-transparent hover:border-slate-200'}`}>
-                <span className="material-symbols-outlined text-[18px] md:text-[20px]">settings</span> Pengaturan Situs
-             </button>}
-             {role === 'admin' && <button onClick={() => setActiveTab('akun-tim')} className={`flex-shrink-0 flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 rounded-xl text-xs md:text-sm font-semibold transition-all ${activeTab === 'akun-tim' ? 'bg-cyan-50 text-cyan-600 shadow-sm' : 'text-slate-600 hover:bg-slate-50 border border-transparent hover:border-slate-200'}`}><span className="material-symbols-outlined text-[18px] md:text-[20px]">manage_accounts</span> Akun Tim</button>}
+
+          {/* Nav — horizontal scroll di mobile, vertical di desktop */}
+          <nav className="flex md:flex-col md:flex-1 md:p-4 md:gap-2 md:space-y-1 overflow-x-auto hide-scrollbar">
+             {[
+               { tab: 'dashboard', icon: 'dashboard', label: 'Ringkasan', alwaysShow: true },
+               { tab: 'berita', icon: 'edit_document', label: 'Tulis', alwaysShow: true },
+               { tab: 'kelola-berita', icon: 'article', label: 'Berita', alwaysShow: true },
+               { tab: 'redaksi', icon: 'badge', label: 'Jurnalis', alwaysShow: false },
+               { tab: 'otomatisasi', icon: 'smart_toy', label: 'Auto', alwaysShow: false },
+               { tab: 'breaking-news', icon: 'campaign', label: 'Breaking', alwaysShow: false },
+               { tab: 'pengaturan', icon: 'settings', label: 'Setting', alwaysShow: false },
+               { tab: 'akun-tim', icon: 'manage_accounts', label: 'Akun', alwaysShow: false },
+             ]
+             .filter(item => item.alwaysShow || role === 'admin')
+             .map(item => (
+               <button key={item.tab} onClick={() => setActiveTab(item.tab)}
+                 className={`
+                   flex-1 md:flex-none flex flex-col md:flex-row items-center justify-center md:justify-start gap-0.5 md:gap-3
+                   px-2 md:px-4 py-2 md:py-3 min-w-[56px] md:min-w-0
+                   rounded-none md:rounded-xl text-[10px] md:text-sm font-semibold transition-all
+                   ${activeTab === item.tab
+                     ? 'text-cyan-600 border-t-2 md:border-t-0 md:bg-cyan-50 border-cyan-500 md:shadow-sm'
+                     : 'text-slate-500 md:text-slate-600 border-t-2 border-transparent hover:text-cyan-500 md:hover:bg-slate-50'}
+                 `}>
+                 <span className="material-symbols-outlined text-[22px] md:text-[20px]">{item.icon}</span>
+                 <span className="hidden md:inline">{item.tab === 'berita' ? 'Tulis Liputan' : item.tab === 'kelola-berita' ? 'Manajemen Berita' : item.tab === 'redaksi' ? 'Kelola Jurnalis' : item.tab === 'otomatisasi' ? 'Otomatisasi' : item.tab === 'breaking-news' ? 'Breaking News' : item.tab === 'pengaturan' ? 'Pengaturan Situs' : item.tab === 'akun-tim' ? 'Akun Tim' : 'Ringkasan'}</span>
+                 <span className="md:hidden text-[9px] leading-none">{item.label}</span>
+               </button>
+             ))}
           </nav>
+
+          {/* Logout — hanya desktop */}
           <div className="p-4 border-t border-slate-100 hidden md:block">
              <button onClick={handleLogout} className="w-full flex items-center justify-center gap-3 px-4 py-3 text-sm font-semibold text-slate-500 hover:text-cyan-500 hover:bg-cyan-50 rounded-xl transition-colors border border-slate-200 hover:border-cyan-200">
                 <span className="material-symbols-outlined text-[20px]">logout</span> Keluar Dasbor
              </button>
           </div>
        </aside>
+             </button>
+          </div>
+       </aside>
 
-       <main className="flex-1 flex flex-col h-[calc(100vh-130px)] md:h-screen overflow-y-auto relative">
-          <header className="bg-white/90 backdrop-blur-md border-b border-slate-200 h-16 flex items-center justify-between px-8 py-4 sticky top-0 z-10 w-full shadow-sm">
-             <h2 className="font-headline font-bold text-xl capitalize flex items-center gap-2">
-               {activeTab === 'dashboard' && <span className="material-symbols-outlined text-cyan-500">monitor_heart</span>}
-               {activeTab === 'berita' && <span className="material-symbols-outlined text-cyan-500">demography</span>}
-               {activeTab === 'redaksi' && <span className="material-symbols-outlined text-cyan-500">assignment_ind</span>}
-               {activeTab.replace('-', ' ')}
+    <main className="flex-1 flex flex-col pb-20 md:pb-0 md:h-screen overflow-y-auto relative">
+          {/* Header */}
+          <header className="bg-white/90 backdrop-blur-md border-b border-slate-200 h-14 md:h-16 flex items-center justify-between px-4 md:px-8 sticky top-0 z-10 w-full shadow-sm">
+             <h2 className="font-headline font-bold text-base md:text-xl capitalize flex items-center gap-2">
+               {activeTab === 'dashboard' && <span className="material-symbols-outlined text-cyan-500 text-[18px] md:text-[24px]">monitor_heart</span>}
+               {activeTab === 'berita' && <span className="material-symbols-outlined text-cyan-500 text-[18px] md:text-[24px]">demography</span>}
+               {activeTab === 'redaksi' && <span className="material-symbols-outlined text-cyan-500 text-[18px] md:text-[24px]">assignment_ind</span>}
+               <span className="truncate max-w-[140px] md:max-w-none">{activeTab.replace(/-/g, ' ')}</span>
              </h2>
-             <div className="flex items-center gap-4 bg-slate-50 py-1.5 px-2 rounded-full border border-slate-200">
-                <div className="w-8 h-8 bg-cyan-100 text-cyan-700 rounded-full flex items-center justify-center font-bold uppercase text-sm">{user?.email?.[0] || 'A'}</div>
-                <span className="text-sm font-semibold text-slate-700 pr-3">{user?.email}</span>
+             <div className="flex items-center gap-2 md:gap-4">
+               <div className="flex items-center gap-2 bg-slate-50 py-1 px-2 rounded-full border border-slate-200">
+                  <div className="w-7 h-7 md:w-8 md:h-8 bg-cyan-100 text-cyan-700 rounded-full flex items-center justify-center font-bold uppercase text-sm">{user?.email?.[0] || 'A'}</div>
+                  <span className="text-xs md:text-sm font-semibold text-slate-700 pr-1 md:pr-3 hidden sm:block max-w-[120px] truncate">{user?.email}</span>
+               </div>
+               {/* Logout mobile — di header */}
+               <button onClick={handleLogout} className="md:hidden p-2 text-slate-400 hover:text-cyan-500">
+                 <span className="material-symbols-outlined text-[20px]">logout</span>
+               </button>
              </div>
           </header>
 
-          <div className="p-8 max-w-5xl mx-auto w-full">
+          <div className="p-4 md:p-8 max-w-5xl mx-auto w-full">
              {/* KONTEN TAB: DASHBOARD */}
              {activeTab === 'dashboard' && (
                 <div className="fade-in space-y-6">
-                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                   <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
                       <div className="bg-white p-5 md:p-6 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4">
                          <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center border border-blue-100 shrink-0"><span className="material-symbols-outlined text-[24px] md:text-[28px]">article</span></div>
                          <div><p className="text-slate-400 text-[9px] md:text-[10px] font-bold uppercase tracking-widest mb-0.5 md:mb-1">Total Berita</p><h3 className="text-2xl md:text-3xl font-black font-headline text-slate-800">{totalNews}</h3></div>
@@ -612,26 +631,25 @@ export default function AdminDashboard() {
  
              {/* KONTEN TAB: MANAJEMEN BERITA */}
              {activeTab === 'kelola-berita' && (
-                <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-8 md:p-10 fade-in min-h-[500px]">
+                <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 md:p-10 fade-in min-h-[500px]">
                    <h3 className="text-2xl font-black font-headline text-slate-800 mb-1">Arsip & Manajemen Berita</h3>
                    <p className="text-slate-500 text-sm mb-8">Daftar seluruh liputan yang telah mengudara. Anda dapat menarik paksa naskah jika diperlukan.</p>
                    
                    <div className="space-y-4">
                       {articlesList.length > 0 ? (
                          articlesList.map(a => (
-                            <div key={a.id} className="flex items-center gap-4 p-4 border border-slate-100 rounded-2xl hover:bg-slate-50 transition-all group">
-                               <div className="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0 bg-slate-100 border border-slate-200">
+                            <div key={a.id} className="flex items-center gap-3 p-3 md:p-4 border border-slate-100 rounded-xl md:rounded-2xl hover:bg-slate-50 transition-all group">
+                               <div className="w-14 h-14 md:w-20 md:h-20 rounded-lg md:rounded-xl overflow-hidden flex-shrink-0 bg-slate-100 border border-slate-200">
                                   <img src={a.image || 'https://via.placeholder.com/150'} className="w-full h-full object-cover" alt="" />
                                </div>
-                               <div className="flex-1">
-                                  <h4 className="font-bold text-slate-800 line-clamp-1 group-hover:text-cyan-500 transition-colors uppercase text-sm tracking-tight">{a.title}</h4>
-                                  <div className="flex items-center gap-3 mt-1.5">
-                                     <span className="bg-cyan-50 text-cyan-500 px-2.5 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider border border-cyan-100">{a.category}</span>
-                                     <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">• {a.author}</span>
+                               <div className="flex-1 min-w-0">
+                                  <h4 className="font-bold text-slate-800 line-clamp-2 group-hover:text-cyan-500 transition-colors text-xs md:text-sm tracking-tight">{a.title}</h4>
+                                  <div className="flex items-center gap-2 mt-1">
+                                     <span className="bg-cyan-50 text-cyan-500 px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider border border-cyan-100">{a.category}</span>
                                   </div>
                                </div>
-                               <button onClick={() => handleDeleteArticle(a.id, a.title)} className="w-10 h-10 rounded-full flex items-center justify-center text-slate-300 hover:text-white hover:bg-cyan-500 transition-all opacity-0 group-hover:opacity-100 shadow-md">
-                                  <span className="material-symbols-outlined text-[20px]">delete_forever</span>
+                               <button onClick={() => handleDeleteArticle(a.id, a.title)} className="w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-slate-300 hover:text-white hover:bg-red-500 transition-all flex-shrink-0">
+                                  <span className="material-symbols-outlined text-[18px] md:text-[20px]">delete_forever</span>
                                </button>
                             </div>
                          ))
@@ -695,7 +713,7 @@ export default function AdminDashboard() {
 
              {/* KONTEN TAB: TULIS BERITA */}
              {activeTab === 'berita' && (
-               <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-8 md:p-10 fade-in">
+               <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 md:p-10 fade-in">
                   <h3 className="text-2xl font-black font-headline text-slate-800 mb-1">Ruang Redaktur</h3>
                   <p className="text-slate-500 text-sm mb-8">Formulir rilis artikel kilat ke beranda pembaca.</p>
                   
