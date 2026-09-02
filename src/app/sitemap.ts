@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { adminDb } from '@/lib/firebaseAdmin';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://multinasnews.com';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://multinasnews.id';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPages: MetadataRoute.Sitemap = ['/', '/redaksi', '/panduan', '/kontak', '/legalitas'].map((path) => ({
