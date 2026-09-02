@@ -110,7 +110,7 @@ export default function Navbar() {
     }
   }, []);
 
-  const menuItems = ['Nasional', 'Internasional', 'Ekonomi', 'Teknologi', 'Hiburan', 'Umum'];
+  const menuItems = ['Nasional', 'Internasional', 'Ekonomi', 'Teknologi', 'Pendidikan', 'Hiburan', 'Umum'];
 
   return (
     <>

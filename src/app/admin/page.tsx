@@ -717,7 +717,7 @@ export default function AdminDashboard() {
                         <div>
                            <label className="block text-xs font-bold text-slate-500 tracking-widest uppercase mb-2">Desk / Jenis Rubrik</label>
                            <select value={category} onChange={e=>setCategory(e.target.value)} className="w-full border border-slate-300 rounded-xl px-5 py-3.5 outline-none focus:border-red-500 transition-all text-slate-700 bg-white">
-                              <option>Nasional</option><option>Internasional</option><option>Ekonomi & Bisnis</option><option>Teknologi</option><option>Investigasi</option><option>Umum</option>
+                              <option>Nasional</option><option>Internasional</option><option>Ekonomi & Bisnis</option><option>Teknologi</option><option>Pendidikan</option><option>Investigasi</option><option>Hiburan</option><option>Umum</option>
                            </select>
                         </div>
                      </div>

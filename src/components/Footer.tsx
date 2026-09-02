@@ -5,7 +5,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 
 export default function Footer() {
-  const menuItems = ['Nasional', 'Internasional', 'Ekonomi', 'Teknologi', 'Hiburan', 'Umum'];
+  const menuItems = ['Nasional', 'Internasional', 'Ekonomi', 'Teknologi', 'Pendidikan', 'Hiburan', 'Umum'];
   const [settings, setSettings] = useState({ siteName: 'multinasnews', email: '', phone: '', address: '', instagram: '', facebook: '', x: '', youtube: '' });
 
   useEffect(() => {
