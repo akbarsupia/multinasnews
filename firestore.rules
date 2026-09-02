@@ -1,0 +1,51 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper function to check if user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Helper: Cek apakah user adalah Admin resmi (Sentinel Protocol)
+    function isAdmin() {
+      return isAuthenticated() && 
+             (request.auth.token.email == 'multinasnews@gmail.com');
+    }
+
+    function role() {
+      return isAuthenticated() ? request.auth.token.role : null;
+    }
+
+    function isEditor() { return role() == 'editor'; }
+    function isReporter() { return role() == 'reporter'; }
+
+    // Articles: Anyone can read, ONLY Admin can write
+    match /articles/{articleId} {
+      allow read: if resource.data.status == 'published' || isAdmin() || isEditor() || (isReporter() && resource.data.authorUid == request.auth.uid);
+      allow create: if isAdmin() || isEditor() || (isReporter() && request.resource.data.authorUid == request.auth.uid && request.resource.data.status == 'draft');
+      allow update, delete: if isAdmin() || isEditor() || (isReporter() && resource.data.authorUid == request.auth.uid && resource.data.status == 'draft' && request.resource.data.status == 'draft');
+    }
+
+    // Journalists: Anyone can read, ONLY Admin can write
+    match /journalists/{journalistId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Ticker dapat dibaca publik, tetapi hanya admin yang boleh mengubahnya.
+    match /siteSettings/{settingId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /users/{userId} {
+      allow read: if isAdmin() || (isAuthenticated() && request.auth.uid == userId);
+      allow write: if false;
+    }
+
+    // Deny access to all other collections by default for maximum security
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

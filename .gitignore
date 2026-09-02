@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local development utilities and diagnostic output
+model-tester.js
+testUpload.mjs
+test_gemini.mjs
+upload_error.txt
