@@ -91,7 +91,7 @@ export default function KategoriPage() {
             {articles.map((article, i) => (
               <Link href={`/berita/${article.id}`} key={i} className="group cursor-pointer">
                 <div className="aspect-[4/3] bg-slate-200 dark:bg-slate-800 rounded-xl mb-6 overflow-hidden border border-slate-100 dark:border-slate-800 shadow-sm">
-                    <img src={article.image || "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=800&q=80"} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt={article.title}/>
+                    <img src={article.image || "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=800&q=80"} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt={article.title} loading="lazy" decoding="async"/>
                 </div>
                 <p className="font-label text-xs font-bold text-cyan-500 tracking-widest uppercase mb-3 flex items-center gap-2">
                    <span className="material-symbols-outlined text-[14px]">schedule</span> {categoryName} • {renderDate(article.createdAt?.seconds)}

@@ -126,7 +126,7 @@ export default async function BeritaDetail({ params }: { params: Promise<{ slug:
       {/* Gambar Cover Utama */}
       <div className="w-full aspect-video md:aspect-[21/9] bg-slate-100 dark:bg-slate-800 rounded-3xl overflow-hidden mb-10 shadow-lg border border-slate-200 dark:border-slate-800 relative group">
          {data.image ? (
-            <img src={data.image} alt={data.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"/>
+            <img src={data.image} alt={data.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" fetchPriority="high" decoding="async"/>
          ) : (
             <div className="w-full h-full flex flex-col items-center justify-center text-slate-300 dark:text-slate-700 bg-slate-50">
                <span className="material-symbols-outlined mb-2" style={{fontSize: '60px'}}>mms</span>

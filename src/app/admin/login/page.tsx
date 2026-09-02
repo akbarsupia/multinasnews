@@ -56,7 +56,7 @@ export default function AdminLogin() {
         <div className="relative z-10 text-center">
           <div className="flex justify-center mb-8">
             <div className="relative group">
-               <img src="/logomultinasnews.PNG" alt="Logo" className="h-16 w-auto drop-shadow-2xl transform group-hover:scale-105 transition-transform duration-500" />
+               <img src="/logomultinasnews.png" alt="Logo Multinasnews" width="205" height="205" className="h-16 w-auto drop-shadow-2xl transform group-hover:scale-105 transition-transform duration-500" />
             </div>
           </div>
 

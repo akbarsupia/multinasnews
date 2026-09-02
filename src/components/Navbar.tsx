@@ -127,7 +127,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between px-4 md:px-6 py-2 md:py-3 max-w-screen-2xl mx-auto">
           <div className="flex items-center gap-4 md:gap-8">
             <Link href="/" className="flex items-center gap-2 cursor-pointer">
-              <img src="/logomultinasnews.PNG" alt="Logo" className="h-8 md:h-9 w-auto object-contain" />
+              <img src="/logomultinasnews.png" alt="Logo Multinasnews" width="205" height="205" className="h-8 md:h-9 w-auto object-contain" />
               <span className="text-xl md:text-2xl font-black tracking-tight text-slate-900 dark:text-white font-headline">
                 multinas<span className="text-cyan-500">news</span>
               </span>

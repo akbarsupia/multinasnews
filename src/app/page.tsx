@@ -112,7 +112,7 @@ export default function Home() {
           <div className="lg:col-span-8 group relative overflow-hidden rounded-xl bg-slate-900 shadow-xl min-h-[28rem] md:min-h-[32rem] flex items-end border border-slate-200 dark:border-slate-800">
             {carouselItems.map((data, idx) => (
               <div key={idx} className={`absolute inset-0 transition-opacity duration-1000 ${currentSlide === idx ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}>
-                <img alt={data.title} className="w-full h-full object-cover transition-transform duration-[10000ms] ease-linear scale-110 group-hover:scale-125 opacity-70" src={data.img}/>
+                <img alt={data.title} className="w-full h-full object-cover transition-transform duration-[10000ms] ease-linear scale-110 group-hover:scale-125 opacity-70" src={data.img} loading={idx === 0 ? 'eager' : 'lazy'} fetchPriority={idx === 0 ? 'high' : 'auto'} decoding="async"/>
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 p-8 md:p-12 w-full max-w-3xl">
                   <div className="flex gap-3 mb-4 animate-slide-up bg-black/40 w-fit px-3 py-1.5 rounded-full backdrop-blur-sm border border-white/10">
@@ -169,7 +169,7 @@ export default function Home() {
                 {mainNews && (
                 <Link href={`/berita/${mainNews.id}`} className="group block">
                   <div className="aspect-[21/9] bg-slate-200 dark:bg-slate-800 mb-5 overflow-hidden rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 relative">
-                    <img className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src={mainNews.image || defaultImg} alt={mainNews.title} />
+                    <img className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src={mainNews.image || defaultImg} alt={mainNews.title} loading="lazy" decoding="async" />
                     <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-red-700 px-3 py-1 text-[10px] font-bold tracking-widest rounded-md uppercase border border-red-100 shadow-sm">{mainNews.category}</div>
                   </div>
                   <h3 className="font-headline text-3xl lg:text-4xl font-black mb-3 group-hover:text-cyan-500 transition-colors dark:text-white leading-[1.2]">{mainNews.title}</h3>
@@ -182,7 +182,7 @@ export default function Home() {
                   {subNews.map((sn, i) => (
                   <Link key={i} href={`/berita/${sn.id}`} className="flex flex-col sm:flex-row gap-4 sm:gap-5 group bg-slate-50 dark:bg-slate-900 p-4 rounded-xl hover:shadow-lg transition-all border border-slate-200 dark:border-slate-800 hover:border-cyan-200">
                     <div className="w-full h-40 sm:w-28 sm:h-28 flex-shrink-0 bg-slate-200 dark:bg-slate-800 overflow-hidden rounded-lg relative">
-                        <img className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src={sn.image || defaultImg} alt={sn.title}/>
+                        <img className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src={sn.image || defaultImg} alt={sn.title} loading="lazy" decoding="async"/>
                     </div>
                     <div className="flex flex-col justify-center">
                       <span className="text-[10px] font-bold text-cyan-500 uppercase tracking-widest mb-1">{sn.category}</span>
@@ -199,7 +199,7 @@ export default function Home() {
                   {restNews.map((article, i) => (
                     <Link key={i} href={`/berita/${article.id}`} className="flex flex-col sm:flex-row gap-4 sm:gap-6 group bg-white dark:bg-slate-900 p-4 rounded-xl shadow-sm hover:shadow-md transition-all border border-slate-100 dark:border-slate-800 fade-in">
                       <div className="w-full sm:w-32 md:w-48 aspect-video flex-shrink-0 bg-slate-200 dark:bg-slate-800 overflow-hidden rounded-lg relative">
-                          <img className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src={article.image || defaultImg} alt={article.title}/>
+                          <img className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src={article.image || defaultImg} alt={article.title} loading="lazy" decoding="async"/>
                           <div className="absolute bottom-2 left-2 bg-black/60 backdrop-blur-sm text-white px-2 py-0.5 text-[8px] font-bold tracking-widest rounded uppercase">{article.category}</div>
                       </div>
                       <div className="flex flex-col justify-center">

@@ -462,7 +462,7 @@ export default function AdminDashboard() {
        <aside className="w-full md:w-64 bg-white border-b md:border-b-0 md:border-r border-slate-200 shadow-[2px_0_10px_rgba(0,0,0,0.02)] flex flex-col z-20 flex-shrink-0">
           <div className="p-4 md:p-6 border-b border-slate-100 flex items-center justify-between md:block">
              <div className="flex items-center gap-2">
-                <img src="/logomultinasnews.PNG" alt="Logo" className="h-8 w-auto object-contain" />
+                <img src="/logomultinasnews.png" alt="Logo Multinasnews" width="205" height="205" className="h-8 w-auto object-contain" />
                 <span className="text-xl font-black tracking-tighter text-slate-800 font-headline">
                   multinas<span className="text-cyan-500">news</span>
                 </span>
