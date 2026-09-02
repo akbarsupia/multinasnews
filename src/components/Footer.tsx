@@ -82,7 +82,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="max-w-screen-xl mx-auto mt-16 pt-8 border-t border-slate-800 text-center md:text-left text-slate-500 font-label text-xs tracking-widest uppercase">
-          &copy; {new Date().getFullYear()} Multinasional Media Nusantara. All rights reserved.
+          &copy; {new Date().getFullYear()} Multi Nasional Indonesia. All rights reserved.
       </div>
     </footer>
   );

@@ -458,11 +458,9 @@ export default function AdminDashboard() {
   if (loading) return <div className="min-h-screen bg-slate-50 flex items-center justify-center"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-500"></div></div>;
 
   return (
+    <div className="min-h-screen flex flex-col md:flex-row bg-slate-50 text-slate-900 font-public-sans w-full">
        {/* SIDEBAR - desktop: left column | mobile: bottom tab bar */}
-       <aside className="
-         fixed bottom-0 left-0 right-0 z-30 bg-white border-t border-slate-200 shadow-[0_-2px_10px_rgba(0,0,0,0.05)]
-         md:relative md:bottom-auto md:left-auto md:right-auto md:w-64 md:border-t-0 md:border-r md:border-slate-200 md:shadow-[2px_0_10px_rgba(0,0,0,0.02)] md:flex md:flex-col md:z-20 md:flex-shrink-0
-       ">
+       <aside className="fixed bottom-0 left-0 right-0 z-30 bg-white border-t border-slate-200 shadow-[0_-2px_10px_rgba(0,0,0,0.05)] md:relative md:bottom-auto md:left-auto md:right-auto md:w-64 md:border-t-0 md:border-r md:border-slate-200 md:shadow-[2px_0_10px_rgba(0,0,0,0.02)] md:flex md:flex-col md:z-20 md:flex-shrink-0">
           {/* Logo — hanya tampil di desktop */}
           <div className="hidden md:flex p-6 border-b border-slate-100 items-center justify-between">
              <div className="flex items-center gap-2">
@@ -488,14 +486,7 @@ export default function AdminDashboard() {
              .filter(item => item.alwaysShow || role === 'admin')
              .map(item => (
                <button key={item.tab} onClick={() => setActiveTab(item.tab)}
-                 className={`
-                   flex-1 md:flex-none flex flex-col md:flex-row items-center justify-center md:justify-start gap-0.5 md:gap-3
-                   px-2 md:px-4 py-2 md:py-3 min-w-[56px] md:min-w-0
-                   rounded-none md:rounded-xl text-[10px] md:text-sm font-semibold transition-all
-                   ${activeTab === item.tab
-                     ? 'text-cyan-600 border-t-2 md:border-t-0 md:bg-cyan-50 border-cyan-500 md:shadow-sm'
-                     : 'text-slate-500 md:text-slate-600 border-t-2 border-transparent hover:text-cyan-500 md:hover:bg-slate-50'}
-                 `}>
+                 className={`flex-1 md:flex-none flex flex-col md:flex-row items-center justify-center md:justify-start gap-0.5 md:gap-3 px-2 md:px-4 py-2 md:py-3 min-w-[56px] md:min-w-0 rounded-none md:rounded-xl text-[10px] md:text-sm font-semibold transition-all ${activeTab === item.tab ? 'text-cyan-600 border-t-2 md:border-t-0 md:bg-cyan-50 border-cyan-500 md:shadow-sm' : 'text-slate-500 md:text-slate-600 border-t-2 border-transparent hover:text-cyan-500 md:hover:bg-slate-50'}`}>
                  <span className="material-symbols-outlined text-[22px] md:text-[20px]">{item.icon}</span>
                  <span className="hidden md:inline">{item.tab === 'berita' ? 'Tulis Liputan' : item.tab === 'kelola-berita' ? 'Manajemen Berita' : item.tab === 'redaksi' ? 'Kelola Jurnalis' : item.tab === 'otomatisasi' ? 'Otomatisasi' : item.tab === 'breaking-news' ? 'Breaking News' : item.tab === 'pengaturan' ? 'Pengaturan Situs' : item.tab === 'akun-tim' ? 'Akun Tim' : 'Ringkasan'}</span>
                  <span className="md:hidden text-[9px] leading-none">{item.label}</span>
@@ -507,9 +498,6 @@ export default function AdminDashboard() {
           <div className="p-4 border-t border-slate-100 hidden md:block">
              <button onClick={handleLogout} className="w-full flex items-center justify-center gap-3 px-4 py-3 text-sm font-semibold text-slate-500 hover:text-cyan-500 hover:bg-cyan-50 rounded-xl transition-colors border border-slate-200 hover:border-cyan-200">
                 <span className="material-symbols-outlined text-[20px]">logout</span> Keluar Dasbor
-             </button>
-          </div>
-       </aside>
              </button>
           </div>
        </aside>

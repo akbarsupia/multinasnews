@@ -26,7 +26,7 @@ export default function KontakPage() {
       label: 'Alamat Redaksi',
       value: 'Jakarta, Indonesia',
       href: null,
-      desc: 'Kantor Redaksi Multinasional Media Nusantara.',
+      desc: 'Kantor Redaksi Multi Nasional Indonesia.',
     },
   ];
 
