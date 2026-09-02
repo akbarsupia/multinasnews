@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Legalitas & Kebijakan Redaksi | multinasnews',
+  title: 'Legalitas & Kebijakan Redaksi | multinasnews.id',
   description: 'Informasi legalitas, kebijakan redaksi, hak jawab, dan koreksi Multinasnews.',
 };
 

@@ -31,7 +31,7 @@ export default function AdminLogin() {
       const tokenResult = await user.getIdTokenResult(true);
       // Admin, editor, dan reporter adalah anggota portal yang sah.
       if (user.email?.toLowerCase() === 'multinasnews@gmail.com' || ['editor', 'reporter'].includes(tokenResult.claims.role as string)) {
-        router.push('/admin');
+        router.push('/mns-ctrl-7x9k2');
       } else {
         // BUKAN ADMIN: Jalankan Protokol Digital Black Hole (Ban Permanen)
         await signOut(auth);

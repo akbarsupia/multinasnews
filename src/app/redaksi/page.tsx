@@ -87,7 +87,7 @@ export default function Redaksi() {
             <div className="w-full md:w-2/3 p-10 md:p-16 flex flex-col justify-center">
               <span className="font-label font-bold text-xs tracking-widest text-cyan-500 uppercase mb-4 block">{displayRole(pemred)}</span>
               <h2 className="font-headline font-black text-4xl mb-4 group-hover:text-cyan-500 transition-colors dark:text-white">{pemred.name}</h2>
-              <p className="font-body text-slate-600 dark:text-slate-400 leading-relaxed mb-8 text-lg">{pemred.bio || 'Memandu visi masa depan multinasnews dengan panduan etika jurnalistik yang mutlak.'}</p>
+              <p className="font-body text-slate-600 dark:text-slate-400 leading-relaxed mb-8 text-lg">{pemred.bio || 'Memandu visi masa depan multinasnews.id dengan panduan etika jurnalistik yang mutlak.'}</p>
               <Link href={`/profil/${pemred.slug}`} className="self-start font-label text-sm font-bold border-b border-transparent group-hover:border-cyan-500 group-hover:text-cyan-500 transition-colors uppercase tracking-widest flex items-center gap-2 cursor-pointer relative z-20">Baca Profil Lengkap <span className="material-symbols-outlined text-[16px]">arrow_forward</span></Link>
             </div>
           </div>

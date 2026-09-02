@@ -3,7 +3,7 @@ import './globals.css';
 import ClientLayoutWrapper from '@/components/ClientLayoutWrapper';
 
 export const metadata: Metadata = {
-  title: 'multinasnews - Independen & Terpercaya',
+  title: 'multinasnews.id - Independen & Terpercaya',
   description: 'Portal berita multinasional dengan komitmen jurnalistik independen, menyajikan kabar terkini dari pelosok negeri hingga liputan global lintas batas.',
 };
 

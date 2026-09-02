@@ -11,16 +11,16 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     const docSnap = await adminDb.collection('articles').doc(slug).get();
     if (docSnap.exists) {
       const data = docSnap.data()!;
-      const description = data.content ? data.content.substring(0, 160).replace(/\n/g, ' ') + '...' : 'Baca berita selengkapnya di multinasnews.';
+      const description = data.content ? data.content.substring(0, 160).replace(/\n/g, ' ') + '...' : 'Baca berita selengkapnya di multinasnews.id.';
       return {
-        title: `${data.title} — multinasnews`,
+        title: `${data.title} — multinasnews.id`,
         description,
         openGraph: {
           title: data.title,
           description,
           images: data.image ? [{ url: data.image, width: 1200, height: 630 }] : [],
           type: 'article',
-          siteName: 'multinasnews',
+          siteName: 'multinasnews.id',
         },
         twitter: {
           card: 'summary_large_image',
@@ -34,8 +34,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     console.error('generateMetadata error:', err);
   }
   return {
-    title: 'Berita — multinasnews',
-    description: 'Baca berita terbaru di multinasnews.',
+    title: 'Berita — multinasnews.id',
+    description: 'Baca berita terbaru di multinasnews.id.',
   };
 }
 

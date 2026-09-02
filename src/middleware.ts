@@ -9,7 +9,7 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Proteksi khusus untuk area Admin
-  if (pathname.startsWith('/admin')) {
+  if (pathname.startsWith('/mns-ctrl-7x9k2')) {
     const isBanned = request.cookies.get('sentinel_ban');
 
     if (isBanned && isBanned.value === 'true') {
@@ -24,5 +24,5 @@ export function middleware(request: NextRequest) {
 
 // Hanya jalankan middleware pada rute admin untuk performa maksimal
 export const config = {
-  matcher: '/admin/:path*',
+  matcher: '/mns-ctrl-7x9k2/:path*',
 };

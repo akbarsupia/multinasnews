@@ -129,7 +129,7 @@ export default function Navbar() {
             <Link href="/" className="flex items-center gap-2 cursor-pointer">
               <img src="/logomultinasnews.png" alt="Logo Multinasnews" width="205" height="205" className="h-8 md:h-9 w-auto object-contain" />
               <span className="text-xl md:text-2xl font-black tracking-tight text-slate-900 dark:text-white font-headline">
-                multinas<span className="text-cyan-500">news</span>
+                multinas<span className="text-cyan-500">news</span><span className="text-slate-400 dark:text-slate-500 font-medium">.id</span>
               </span>
             </Link>
             <div className="hidden md:flex items-center gap-6 font-headline tracking-tight font-bold text-lg">
@@ -155,7 +155,7 @@ export default function Navbar() {
               <span className="material-symbols-outlined text-[20px] sm:text-[24px]">notifications</span>
             </button>
             <button 
-              className="p-1 sm:p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors hidden sm:block dark:text-white" 
+              className="p-1 sm:p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors dark:text-white" 
               onClick={toggleTheme}
             >
               <span className="material-symbols-outlined text-[20px] sm:text-[24px]">
@@ -172,6 +172,10 @@ export default function Navbar() {
         {mobileMenuOpen && (
           <div className="md:hidden bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 absolute w-full left-0 shadow-md">
             <div className="px-6 py-4 space-y-4 font-headline font-bold text-lg flex flex-col items-start pb-6">
+              <button onClick={toggleTheme} className="w-full pl-3 flex items-center gap-3 text-slate-500 dark:text-slate-400 border-l-4 border-transparent hover:text-slate-900 dark:hover:text-white transition-colors">
+                <span className="material-symbols-outlined text-[20px]">{isDark ? 'light_mode' : 'dark_mode'}</span>
+                {isDark ? 'Mode Terang' : 'Mode Gelap'}
+              </button>
               <Link href="/" onClick={() => setMobileMenuOpen(false)} className={`w-full pl-3 ${pathname === '/' ? 'text-slate-900 dark:text-white border-l-4 border-cyan-500' : 'text-slate-500 dark:text-slate-400 border-l-4 border-transparent hover:text-slate-900'}`}>Beranda</Link>
               <Link href="/redaksi" onClick={() => setMobileMenuOpen(false)} className={`w-full pl-3 ${pathname === '/redaksi' ? 'text-slate-900 dark:text-white border-l-4 border-cyan-500' : 'text-slate-500 dark:text-slate-400 border-l-4 border-transparent hover:text-slate-900'}`}>Redaksi</Link>
               {menuItems.map(item => (

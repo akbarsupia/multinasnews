@@ -47,7 +47,7 @@ export default function AdminDashboard() {
   const [breakingNewsText, setBreakingNewsText] = useState('');
   const [breakingNewsActive, setBreakingNewsActive] = useState(false);
   const [savingBreakingNews, setSavingBreakingNews] = useState(false);
-  const [siteSettings, setSiteSettings] = useState({ siteName: 'multinasnews', domain: '', email: '', phone: '', address: '', instagram: '', facebook: '', x: '', youtube: '', seoTitle: '', seoDescription: '' });
+  const [siteSettings, setSiteSettings] = useState({ siteName: 'multinasnews.id', domain: '', email: '', phone: '', address: '', instagram: '', facebook: '', x: '', youtube: '', seoTitle: '', seoDescription: '' });
   const [savingSiteSettings, setSavingSiteSettings] = useState(false);
   const [memberName, setMemberName] = useState('');
   const [memberEmail, setMemberEmail] = useState('');
@@ -99,10 +99,10 @@ export default function AdminDashboard() {
         } else {
           // Bukan Admin: Keluarkan secara paksa
           await signOut(auth);
-          router.push('/admin/login?error=unauthorized');
+          router.push('/mns-ctrl-7x9k2/login?error=unauthorized');
         }
       } else {
-        router.push('/admin/login');
+        router.push('/mns-ctrl-7x9k2/login');
       }
     });
     return () => unsubscribe();

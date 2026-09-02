@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Panduan Media Siber — multinasnews',
-  description: 'Pedoman pemberitaan media siber multinasnews berdasarkan kaidah jurnalistik yang bertanggung jawab.',
+  title: 'Panduan Media Siber — multinasnews.id',
+  description: 'Pedoman pemberitaan media siber multinasnews.id berdasarkan kaidah jurnalistik yang bertanggung jawab.',
 };
 
 export default function PanduanPage() {
@@ -31,7 +31,7 @@ export default function PanduanPage() {
     {
       icon: 'gavel',
       title: 'Independensi Redaksi',
-      desc: 'Redaksi multinasnews bebas dari intervensi pemilik modal, pemerintah, maupun pihak ketiga. Keputusan editorial sepenuhnya berada di tangan dewan redaksi.',
+      desc: 'Redaksi multinasnews.id bebas dari intervensi pemilik modal, pemerintah, maupun pihak ketiga. Keputusan editorial sepenuhnya berada di tangan dewan redaksi.',
     },
     {
       icon: 'link',
@@ -59,7 +59,7 @@ export default function PanduanPage() {
           Panduan Media Siber
         </h1>
         <p className="font-headline text-xl md:text-2xl italic font-light text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-          Pedoman etika dan standar jurnalistik yang menjadi landasan kerja redaksi multinasnews.
+          Pedoman etika dan standar jurnalistik yang menjadi landasan kerja redaksi multinasnews.id.
         </p>
       </div>
 
@@ -72,7 +72,7 @@ export default function PanduanPage() {
             <p className="font-body text-slate-600 dark:text-slate-400 leading-relaxed">
               Panduan ini disusun berdasarkan <strong>Pedoman Pemberitaan Media Siber</strong> yang ditetapkan oleh Dewan Pers, 
               serta mengacu pada <strong>Undang-Undang No. 40 Tahun 1999 tentang Pers</strong> dan <strong>Kode Etik Jurnalistik</strong>. 
-              Seluruh insan redaksi multinasnews wajib mematuhi pedoman ini dalam menjalankan tugas jurnalistik.
+              Seluruh insan redaksi multinasnews.id wajib mematuhi pedoman ini dalam menjalankan tugas jurnalistik.
             </p>
           </div>
         </div>

@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Hubungi Kami — multinasnews',
-  description: 'Hubungi redaksi multinasnews untuk pertanyaan, saran, kritik, kerja sama, atau hak jawab.',
+  title: 'Hubungi Kami — multinasnews.id',
+  description: 'Hubungi redaksi multinasnews.id untuk pertanyaan, saran, kritik, kerja sama, atau hak jawab.',
 };
 
 export default function KontakPage() {
