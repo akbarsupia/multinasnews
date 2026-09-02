@@ -4,6 +4,8 @@ import { adminDb } from '@/lib/firebaseAdmin';
 import ViewTracker from '@/components/ViewTracker';
 import ArticleActions from '@/components/ArticleActions';
 
+export const dynamic = 'force-dynamic';
+
 // --- SEO: Dynamic Metadata untuk setiap berita ---
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
