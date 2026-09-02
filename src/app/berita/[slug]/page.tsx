@@ -43,10 +43,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function BeritaDetail({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
 
+  const decodedSlug = decodeURIComponent(slug);
+
   let data: any = null;
   let relatedArticle: { id: string; title: string } | null = null;
   try {
-    const docSnap = await adminDb.collection('articles').doc(slug).get();
+    const docSnap = await adminDb.collection('articles').doc(decodedSlug).get();
     if (docSnap.exists) {
       const raw = docSnap.data()!;
       data = {
@@ -78,7 +80,7 @@ export default async function BeritaDetail({ params }: { params: Promise<{ slug:
       .where('status', '==', 'published')
       .limit(3)
       .get();
-    const related = relatedSnap.docs.find((article) => article.id !== slug);
+    const related = relatedSnap.docs.find((article) => article.id !== decodedSlug);
     if (related) relatedArticle = { id: related.id, title: related.data().title };
   } catch (err) {
     console.error('Fetch related article error:', err);

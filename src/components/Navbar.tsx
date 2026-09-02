@@ -129,7 +129,7 @@ export default function Navbar() {
             <Link href="/" className="flex items-center gap-2 cursor-pointer">
               <img src="/logomultinasnews.png" alt="Logo Multinasnews" width="205" height="205" className="h-8 md:h-9 w-auto object-contain" />
               <span className="text-xl md:text-2xl font-black tracking-tight text-slate-900 dark:text-white font-headline">
-                multinas<span className="text-cyan-500">news</span><span className="text-slate-400 dark:text-slate-500 font-medium">.id</span>
+                multinas<span className="text-cyan-500">news</span>.id
               </span>
             </Link>
             <div className="hidden md:flex items-center gap-6 font-headline tracking-tight font-bold text-lg">
