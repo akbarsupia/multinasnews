@@ -23,7 +23,8 @@ export default async function Head({ params }: { params: Promise<{ slug: string 
       .replace(/\s+/g, ' ')
       .slice(0, 160);
     const url = `${SITE_URL}/berita/${encodeURIComponent(slug)}`;
-    const image = absoluteUrl(data.image);
+    // Artikel tanpa gambar tetap memiliki kartu preview yang rapi di WhatsApp.
+    const image = absoluteUrl(data.image || '/logomultinasnews.png');
 
     return (
       <>
