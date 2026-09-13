@@ -14,6 +14,7 @@ export interface Journalist {
   uid: string; // The specific UID used in UI
   name: string;
   title: string; // This was 'role' or 'specialization'
+  specialty?: string;
   bio: string;
   img: string; // This was 'profileImage'
   verified?: boolean;
