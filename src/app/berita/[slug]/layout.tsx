@@ -34,7 +34,12 @@ export async function generateMetadata(
         
         const imgField = data.fields.image?.stringValue;
         if (imgField) {
-          image = imgField.startsWith('/') ? `https://www.multinasnews.id${imgField}` : imgField;
+          // WhatsApp cannot read inline base64 images; it needs a public HTTPS URL.
+          image = imgField.startsWith('data:image/')
+            ? `https://www.multinasnews.id/api/og-image/${encodeURIComponent(slug)}`
+            : imgField.startsWith('/')
+              ? `https://www.multinasnews.id${imgField}`
+              : imgField;
         }
       }
     }
