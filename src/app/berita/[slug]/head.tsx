@@ -24,7 +24,9 @@ export default async function Head({ params }: { params: Promise<{ slug: string 
       .slice(0, 160);
     const url = `${SITE_URL}/berita/${encodeURIComponent(slug)}`;
     // Artikel tanpa gambar tetap memiliki kartu preview yang rapi di WhatsApp.
-    const image = absoluteUrl(data.image || '/logomultinasnews.png');
+    const image = data.image?.startsWith('data:image/')
+      ? `${SITE_URL}/api/og-image/${encodeURIComponent(slug)}`
+      : absoluteUrl(data.image || '/logomultinasnews.png');
 
     return (
       <>
