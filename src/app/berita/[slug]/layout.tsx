@@ -48,7 +48,7 @@ export async function generateMetadata(
     openGraph: {
       title,
       description,
-      images: [image],
+      images: [{ url: image }],
       type: 'article',
       url: `https://www.multinasnews.id/berita/${slug}`,
     },
@@ -56,7 +56,7 @@ export async function generateMetadata(
       card: 'summary_large_image',
       title,
       description,
-      images: [image],
+      images: [{ url: image }],
     },
   };
 }

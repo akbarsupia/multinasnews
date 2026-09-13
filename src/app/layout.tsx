@@ -3,8 +3,14 @@ import './globals.css';
 import ClientLayoutWrapper from '@/components/ClientLayoutWrapper';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.multinasnews.id'),
   title: 'multinasnews.id - Independen & Terpercaya',
   description: 'Portal berita multinasional dengan komitmen jurnalistik independen, menyajikan kabar terkini dari pelosok negeri hingga liputan global lintas batas.',
+  icons: {
+    icon: '/icon.png',
+    apple: '/apple-icon.png',
+    shortcut: '/icon.png',
+  }
 };
 
 export default function RootLayout({

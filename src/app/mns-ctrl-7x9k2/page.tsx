@@ -34,6 +34,7 @@ export default function AdminDashboard() {
   const [jImg, setJImg] = useState('');
   const [isAddingUser, setIsAddingUser] = useState(false);
   const [showAddForm, setShowAddForm] = useState(false);
+  const [editJournalistId, setEditJournalistId] = useState<string | null>(null);
 
   // Stats & Lists
   const [totalNews, setTotalNews] = useState(0);
@@ -382,29 +383,53 @@ export default function AdminDashboard() {
     if (!jName || !jRole) return showModernAlert('Validasi Gagal', 'Nama dan Posisi wajib diisi!', 'error');
     setIsAddingUser(true);
     
-    const uid = 'MN-' + new Date().getFullYear() + '-' + Math.floor(1000 + Math.random() * 9000);
-    const slug = jName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-
     try {
-      await addDoc(collection(db, 'journalists'), {
-        slug,
-        name: jName,
-        title: jRole,
-        specialty: jSpec,
-        bio: jBio,
-        img: jImg || '',
-        uid,
-        joinDate: new Date().toLocaleDateString('id-ID', { month: 'long', year: 'numeric' }),
-        createdAt: serverTimestamp()
-      });
-      showModernAlert('Jurnalis Berhasil Ditambahkan', `Selamat, ${jName} telah bergabung!\n\nNomor ID Press: ${uid}`, 'success');
+      if (editJournalistId) {
+        const slug = jName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+        await setDoc(doc(db, 'journalists', editJournalistId), {
+          slug,
+          name: jName,
+          title: jRole,
+          specialty: jSpec,
+          bio: jBio,
+          img: jImg || '',
+          updatedAt: serverTimestamp()
+        }, { merge: true });
+        showModernAlert('Profil Diperbarui', 'Data Jurnalis berhasil diperbarui.', 'success');
+      } else {
+        const uid = 'MN-' + new Date().getFullYear() + '-' + Math.floor(1000 + Math.random() * 9000);
+        const slug = jName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+        await addDoc(collection(db, 'journalists'), {
+          slug,
+          name: jName,
+          title: jRole,
+          specialty: jSpec,
+          bio: jBio,
+          img: jImg || '',
+          uid,
+          joinDate: new Date().toLocaleDateString('id-ID', { month: 'long', year: 'numeric' }),
+          createdAt: serverTimestamp()
+        });
+        showModernAlert('Jurnalis Berhasil Ditambahkan', `Selamat, ${jName} telah bergabung!\n\nNomor ID Press: ${uid}`, 'success');
+      }
       setJName(''); setJRole('Jurnalis / Wartawan'); setJSpec(''); setJBio(''); setJImg('');
+      setEditJournalistId(null);
       setShowAddForm(false);
       fetchStats(); // Update UI langsung
     } catch (err: any) {
-      showModernAlert('Gagal Mendaftar Jurnalis', err.message, 'error');
+      showModernAlert(editJournalistId ? 'Gagal Memperbarui Profil' : 'Gagal Mendaftar Jurnalis', err.message, 'error');
     }
     setIsAddingUser(false);
+  };
+
+  const startEditJournalist = (j: Journalist) => {
+    setJName(j.name || '');
+    setJRole(j.title || 'Jurnalis / Wartawan');
+    setJSpec(j.specialty || '');
+    setJBio(j.bio || '');
+    setJImg(j.img || '');
+    setEditJournalistId(j.id);
+    setShowAddForm(true);
   };
 
   const handleDeleteJournalist = async (id: string, name: string) => {
@@ -767,14 +792,20 @@ export default function AdminDashboard() {
                         <h3 className="text-2xl font-black font-headline text-slate-800">Manajemen Personalia Redaksi</h3>
                         <p className="text-slate-500 text-sm mt-1">Sistem kontrol dan daftar kartu ID Press digital yang mencerminkan publik.</p>
                      </div>
-                     <button onClick={() => setShowAddForm(!showAddForm)} className="bg-cyan-500 text-white px-5 py-3 rounded-xl font-bold flex items-center gap-2 hover:bg-cyan-600 shadow-lg shadow-cyan-500/20 transition group shrink-0">
-                        <span className={`material-symbols-outlined text-sm transition-transform ${showAddForm ? 'rotate-45' : 'group-hover:rotate-90'}`}>{showAddForm ? 'close' : 'add'}</span> <span className="hidden sm:inline">{showAddForm ? 'Batal Tambah' : 'Anggota Baru'}</span>
+                     <button onClick={() => {
+                        if (showAddForm) {
+                           setEditJournalistId(null);
+                           setJName(''); setJRole('Jurnalis / Wartawan'); setJSpec(''); setJBio(''); setJImg('');
+                        }
+                        setShowAddForm(!showAddForm);
+                     }} className="bg-cyan-500 text-white px-5 py-3 rounded-xl font-bold flex items-center gap-2 hover:bg-cyan-600 shadow-lg shadow-cyan-500/20 transition group shrink-0">
+                        <span className={`material-symbols-outlined text-sm transition-transform ${showAddForm ? 'rotate-45' : 'group-hover:rotate-90'}`}>{showAddForm ? 'close' : 'add'}</span> <span className="hidden sm:inline">{showAddForm ? 'Batal' : 'Anggota Baru'}</span>
                      </button>
                   </div>
 
                   {showAddForm ? (
                     <form onSubmit={handleAddJournalist} className="space-y-6 fade-in p-6 md:p-8 border-2 border-red-50 rounded-2xl bg-cyan-50/20 relative overflow-hidden">
-                       <h4 className="font-bold text-red-800 mb-4 border-b border-cyan-100 pb-2 flex items-center gap-2"><span className="material-symbols-outlined font-light text-red-500">badge</span> Pencetakan ID Card Instan</h4>
+                       <h4 className="font-bold text-red-800 mb-4 border-b border-cyan-100 pb-2 flex items-center gap-2"><span className="material-symbols-outlined font-light text-red-500">badge</span> {editJournalistId ? 'Edit ID Card' : 'Pencetakan ID Card Instan'}</h4>
                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                           <div><label className="block text-xs font-bold text-slate-500 mb-2 tracking-wide">Nama Lengkap</label><input type="text" value={jName} onChange={e=>setJName(e.target.value)} required className="w-full border border-slate-300 focus:border-red-500 outline-none rounded-lg px-4 py-2" placeholder="Cth: Najwa Shihab" /></div>
                           <div><label className="block text-xs font-bold text-slate-500 mb-2 tracking-wide">Jabatan</label><select value={jRole} onChange={e=>setJRole(e.target.value)} required className="w-full border border-slate-300 focus:border-red-500 outline-none rounded-lg px-4 py-2 bg-white"><option>Dewan Pendiri</option><option>Dewan Penasihat</option><option>Dewan Redaksi</option><option>Pemimpin Perusahaan</option><option>Pemimpin Redaksi</option><option>Staf Redaksi</option><option>Bendahara</option><option>Editor / Layout Design</option><option>Kaperwil Jawa Barat</option><option>Koordinator Liputan</option><option>Kabiro Kab. Bogor</option><option>Jurnalis / Wartawan</option></select></div>
@@ -783,7 +814,7 @@ export default function AdminDashboard() {
                        </div>
                        <div><label className="block text-xs font-bold text-slate-500 mb-2 tracking-wide">Jejak Karya (Bio)</label><textarea value={jBio} onChange={e=>setJBio(e.target.value)} rows={3} className="w-full border border-slate-300 focus:border-red-500 outline-none rounded-lg px-4 py-3" placeholder="Semenjak memenangkan piala..." /></div>
                        <button type="submit" disabled={isAddingUser} className="bg-cyan-500 text-white px-6 py-3 rounded-lg font-bold hover:bg-cyan-600 w-full disabled:opacity-50 flex items-center justify-center gap-2">
-                         {isAddingUser ? <><span className="material-symbols-outlined animate-spin">sync</span> Mengukir Database...</> : 'Daftarkan secara Magis ke Beranda Publik!'}
+                         {isAddingUser ? <><span className="material-symbols-outlined animate-spin">sync</span> Mengukir Database...</> : (editJournalistId ? 'Simpan Perubahan Profil' : 'Daftarkan secara Magis ke Beranda Publik!')}
                        </button>
                     </form>
                   ) : (
@@ -795,19 +826,23 @@ export default function AdminDashboard() {
                                   <div className="w-16 h-16 rounded-full bg-slate-200 overflow-hidden flex-shrink-0 border-2 border-white shadow-sm flex items-center justify-center relative bg-slate-100">
                                      {j.img ? <img src={j.img} alt={j.name} className="w-full h-full object-cover"/> : <span className="material-symbols-outlined text-4xl text-slate-400">person</span>}
                                   </div>
-                                  <div className="flex-1 pr-6">
-                                     <h4 className="font-headline font-bold text-slate-900 group-hover:text-cyan-500 transition-colors line-clamp-1">{j.name}</h4>
-                                     <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider line-clamp-1 border-b border-transparent group-hover:border-cyan-200 pb-0.5">{j.title}</p>
+                                  <div className="flex-1 pr-14 min-w-0">
+                                     <h4 className="font-headline font-bold text-slate-900 group-hover:text-cyan-500 transition-colors truncate">{j.name}</h4>
+                                     <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider truncate border-b border-transparent group-hover:border-cyan-200 pb-0.5">{j.title}</p>
                                   </div>
                               </div>
                               <div className="flex items-center justify-between border-t border-slate-200 pt-3">
                                   <span className="text-[10px] bg-red-100 text-red-700 px-2.5 py-1 rounded font-mono tracking-widest font-bold">{j.uid}</span>
                               </div>
-                              <div className="absolute top-0 right-0 h-full w-12 flex items-center justify-center bg-gradient-to-l from-red-50/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
-                              <button onClick={() => handleDeleteJournalist(j.id, j.name)} title="Cabut ID Press Secara Permanen" className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center text-red-300 hover:text-white hover:bg-cyan-500 transition-all opacity-0 group-hover:opacity-100 scale-90 group-hover:scale-100 shadow-md">
-                                <span className="material-symbols-outlined text-[20px]">delete_forever</span>
-                              </button>
-                           </div>
+                              <div className="absolute top-0 right-0 h-full w-24 flex items-center justify-end pr-2 gap-2 bg-gradient-to-l from-red-50/90 via-red-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                                  <button onClick={() => startEditJournalist(j)} title="Edit Profil" className="w-8 h-8 rounded-full flex items-center justify-center text-cyan-500 hover:text-white hover:bg-cyan-600 transition-all shadow-sm">
+                                    <span className="material-symbols-outlined text-[18px]">edit</span>
+                                  </button>
+                                  <button onClick={() => handleDeleteJournalist(j.id, j.name)} title="Cabut ID Press Secara Permanen" className="w-8 h-8 rounded-full flex items-center justify-center text-red-400 hover:text-white hover:bg-red-500 transition-all shadow-sm">
+                                    <span className="material-symbols-outlined text-[18px]">delete_forever</span>
+                                  </button>
+                               </div>
+                            </div>
                          ))}
                        </div>
                     ) : (
