@@ -5,7 +5,7 @@ import type { NextRequest } from 'next/server';
  * Sentinel Middleware
  * Gerbang pertahanan sisi server untuk memutus koneksi penyusup
  */
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Proteksi khusus untuk area Admin
