@@ -834,7 +834,7 @@ export default function AdminDashboard() {
                               <div className="flex items-center justify-between border-t border-slate-200 pt-3">
                                   <span className="text-[10px] bg-red-100 text-red-700 px-2.5 py-1 rounded font-mono tracking-widest font-bold">{j.uid}</span>
                               </div>
-                              <div className="absolute top-0 right-0 h-full w-24 flex items-center justify-end pr-2 gap-2 bg-gradient-to-l from-red-50/90 via-red-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                              <div className="absolute top-0 right-0 h-full w-24 flex items-center justify-end pr-2 gap-2 bg-gradient-to-l from-red-50/90 via-red-50/50 to-transparent opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity">
                                   <button onClick={() => startEditJournalist(j)} title="Edit Profil" className="w-8 h-8 rounded-full flex items-center justify-center text-cyan-500 hover:text-white hover:bg-cyan-600 transition-all shadow-sm">
                                     <span className="material-symbols-outlined text-[18px]">edit</span>
                                   </button>
