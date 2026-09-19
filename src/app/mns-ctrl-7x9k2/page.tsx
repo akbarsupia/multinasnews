@@ -300,9 +300,12 @@ export default function AdminDashboard() {
   };
 
   const handleDeleteArticle = async (id: string, title: string) => {
+    const words = title.split(' ');
+    const truncatedTitle = words.length > 50 ? words.slice(0, 50).join(' ') + '...' : title;
+    
     showModernConfirm(
       'Konfirmasi Hapus Berita',
-      `Apakah Anda sungguh yakin ingin menghapus berita "${title}" secara permanen? Tindakan ini tidak dapat dibatalkan.`,
+      `Apakah Anda sungguh yakin ingin menghapus berita "${truncatedTitle}" secara permanen? Tindakan ini tidak dapat dibatalkan.`,
       async () => {
         try {
           await deleteDoc(doc(db, 'articles', id));
