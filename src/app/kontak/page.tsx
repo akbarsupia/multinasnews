@@ -24,9 +24,9 @@ export default function KontakPage() {
     {
       icon: 'location_on',
       label: 'Alamat Redaksi',
-      value: 'Jakarta, Indonesia',
+      value: 'Bogor, Jawa Barat',
       href: null,
-      desc: 'Kantor Redaksi Multi Nasional Indonesia.',
+      desc: 'Jl. Raya Cigudeg RT. 003/007 Ds Cigudeg Kec. Cigudeg Kab. Bogor 16660',
     },
   ];
 
